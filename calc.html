@@ -25,7 +25,7 @@ Total Miles Driven</p>
 <p>*  <input type="text" name="estmilessaved" id="estmilessaved" class="roiField" />
 Estimated Mileage Reduction (in percent format)</p>
 
-<button class="smallButton" id="roiCalc" onclick="return false">Calculate Savings</button>
+<button id="roi-calc">Calculate Savings</button>
 <br />
 
 <h2>Daily Savings</h2>
@@ -51,18 +51,19 @@ Total Annual Savings</p>
 
 <script type="text/javascript">
 $(function() {
-    $("#roiCalc").click(function() {
-        var T,S,p,C,M,m;
-        T = parseInt(("#trucks").val());
-        S = parseFloat($("#salary").val());
-        p = parseFloat($("#cpm").val());
-        C = parseInt(("#currmiles").val());
-        M = parseInt(("#estmilessaved").val())/100;
+    $("#roi-calc").click(function(e) {
+        e.preventDefault();
 
-        m = T * C; //testing with easy math
+        var trucks = parseInt($("#trucks").val());
+        var salary = parseFloat($("#salary").val());
+        var cpm = parseFloat($("#cpm").val());
+        var miles = parseInt($("#currmiles").val());
+        var reduction = parseInt($("#estmilessaved").val())/100;
 
-        if(!isNaN(m)) {
-            $("#milessaved").val(m.toFixed(2));
+        var savings = trucks * cpm; //testing with easy math
+
+        if(!isNaN(savings)) {
+            $("#milessaved").val(savings.toFixed(2));
             /* $("#hourssaved").val(P.toFixed(2));
             $("#dailywages").val(P.toFixed(2));
             $("#vehcosts").val(P.toFixed(2));
@@ -71,7 +72,6 @@ $(function() {
         } else {
             $("#milessaved").val('There was an error');
         }
-        return false;
     });
 });
 </script>
