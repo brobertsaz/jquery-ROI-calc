@@ -10,8 +10,10 @@
 <body>
 
 <h1>ROI Calculator</h1>
+
 <p>Please fill in the fields with the "*" and then click the button for the calculation</p>
-   <form >
+
+<form>
 <p>*  <input type="text" name="trucks" id="trucks" class="roiField" />
 Number of Vehicles</p>
 <p>*  <input type="text" name="salary" id="salary" class="roiField" />
@@ -26,7 +28,7 @@ Estimated Mileage Reduction (in percent format)</p>
 <button class="smallButton" id="roiCalc" onclick="return false">Calculate Savings</button>
 <br />
 
-<h4>Daily Savings</h4>
+<h2>Daily Savings</h2>
 
 <p>  <input type="text" name="milessaved" id="milessaved" class="roiAnswer" />
 Daily Miles Saved</p>
@@ -37,7 +39,7 @@ Savings in Wages Daily</p>
 <p>  <input type="text" name="vehcosts" id="vehcosts" class="roiAnswer" />
 Savings in Vehicle Costs Daily</p>
 
-<h4>Long Term Savings</h4>
+<h2>Long Term Savings</h2>
 
 <p>  <input type="text" name="monthlysavings" id="monthlysavings" class="roiAnswer" />
 Total Monthly Savings</p>
@@ -48,30 +50,29 @@ Total Annual Savings</p>
 
 
 <script type="text/javascript">
-$("#roiCalc").click(function(){
-var T,S,p,C,M,m;
-T = parseInt(("#trucks").val());
-S = parseFloat($("#salary").val());
-p = parseFloat($("#cpm").val());
-C = parseInt(("#currmiles").val());
-M = parseInt(("#estmilessaved").val())/100;
+$(function() {
+    $("#roiCalc").click(function() {
+        var T,S,p,C,M,m;
+        T = parseInt(("#trucks").val());
+        S = parseFloat($("#salary").val());
+        p = parseFloat($("#cpm").val());
+        C = parseInt(("#currmiles").val());
+        M = parseInt(("#estmilessaved").val())/100;
 
-m = T * C; <!-- testing with easy math -->
+        m = T * C; //testing with easy math
 
-if(!isNaN(m))
-{
-$("#milessaved").val(m.toFixed(2));
-<!-- $("#hourssaved").val(P.toFixed(2)); -->
-<!-- $("#dailywages").val(P.toFixed(2)); -->
-<!-- $("#vehcosts").val(P.toFixed(2)); -->
-<!-- $("#monthlysavings").val(P.toFixed(2)); -->
-<!-- $("#annualsavings").val(P.toFixed(2)); -->
-}
-else
-{
-$("#milessaved").val('There was an error');
-}
-return false;
+        if(!isNaN(m)) {
+            $("#milessaved").val(m.toFixed(2));
+            /* $("#hourssaved").val(P.toFixed(2));
+            $("#dailywages").val(P.toFixed(2));
+            $("#vehcosts").val(P.toFixed(2));
+            $("#monthlysavings").val(P.toFixed(2));
+            $("#annualsavings").val(P.toFixed(2)); */
+        } else {
+            $("#milessaved").val('There was an error');
+        }
+        return false;
+    });
 });
 </script>
 
