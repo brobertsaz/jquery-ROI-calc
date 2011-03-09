@@ -16,10 +16,14 @@
 <p>Please fill in the fields with the "*" and then click the button for the calculation</p>
 
 <form id="roi-form">
-<p>*  <input type="text" name="trucks" id="trucks" class="required" />
-Number of Vehicles</p>
-<p>*  <input type="text" name="salary" id="salary" class="required" />
-Hourly Driver Salary</p>
+    <p>
+        * <input type="text" name="trucks" id="trucks" class="required" />
+        <label for="trucks">Number of Vehicles</label>
+    </p>
+    <p>
+        *  <input type="text" name="salary" id="salary" class="required" />
+        <label for="salary">Hourly Driver Salary</label>
+    </p>
 <p>*  <input type="text" name="cpm" id="cpm" class="required" />
 Cost per Mile</p>
 <p>*  <input type="text" name="currmiles" id="currmiles" class="required" />
@@ -31,8 +35,8 @@ Total Miles Driven per Vehicle</p>
 <option value='20'>20 %</option>
 </select> Estimated Mileage Reduction</p>
 
+<input type="submit" id="roi-calc" value="Calculate Savings">
 
-<button id="roi-calc">Calculate Savings</button>
 <br />
 
 <h3>Daily Savings</h3>
@@ -60,7 +64,7 @@ Total Annual Savings</p>
 $(function() {
     $("#roi-form").validate();
 
-    $("#roi-calc").click(function(e) {
+    $("#roi-form").submit(function(e) {
         e.preventDefault();
 
         var trucks = parseInt($("#trucks").val());
