@@ -2,17 +2,11 @@
 
 <head>
     <title>ROI Calculator</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/validate/jquery.validate.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 
    	<link rel="stylesheet" href="calc.css" type="text/css" charset="utf-8">
 
-  <script>
-  $(document).ready(function(){
-    $("#roi-form").validate();
-  });
-  </script>	
-	
 </head>
 
 <body>
@@ -64,6 +58,8 @@ Total Annual Savings</p>
 
 <script type="text/javascript">
 $(function() {
+    $("#roi-form").validate();
+
     $("#roi-calc").click(function(e) {
         e.preventDefault();
 
