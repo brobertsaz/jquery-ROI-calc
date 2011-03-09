@@ -2,33 +2,58 @@
 
 <head>
     <title>ROI Calculator</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="calc.css" type="text/css" charset="utf-8">
-</script>   
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+	
+<style>
+
+		// CSS goes here
+label, input[type="text"]{
+    float:left;
+    display:block;
+}
+label
+{
+    margin-right: 5px;
+}
+.field{
+    width:100%;
+    overflow:auto;
+    margin:5px 0px;
+}
+
+
+</style>
+
 </head>
 
 <body>
 
-<h1>ROI Calculator</h1>
+<h2>ROI Calculator</h2>
 
 <p>Please fill in the fields with the "*" and then click the button for the calculation</p>
 
-<form>
-<p>*  <input type="text" name="trucks" id="trucks" class="roiField" />
-Number of Vehicles</p>
-<p>*  <input type="text" name="salary" id="salary" class="roiField" />
-Hourly Driver Salary</p>
-<p>*  <input type="text" name="cpm" id="cpm" class="roiField" />
-Cost per Mile</p>
-<p>*  <input type="text" name="currmiles" id="currmiles" class="roiField" />
-Total Miles Driven</p>
-<p>*  <input type="text" name="estmilessaved" id="estmilessaved" class="roiField" />
-Estimated Mileage Reduction (in percent format)</p>
+<form id="roi-form">
+<p><label>* Number of Vehicles:    </label><input type="text" name="trucks" id="trucks" class="required" /></p>
 
-<button id="roi-calc">Calculate Savings</button>
+<p><label>* Hourly Driver Salary:</label><input type="text" name="salary" id="salary" class="required" /></p>
+
+<p><label>* Cost per Mile: </label><input type="text" name="cpm" id="cpm" class="required" /></p>
+
+<p><label>* Total Miles Driven per Vehicle: </label><input type="text" name="currmiles" id="currmiles" class="required" /></p>
+
+<p><label>* Estimated Mileage Reduction: </label><select id="list" class="required">
+<option value='0'>Select the Savings.....</option>
+<option value='10'>10 %</option>
+<option value='15'>15 %</option>
+<option value='20'>20 %</option>
+</select> </p>
+
+<input type="submit" id="roi-calc" value="Calculate Savings">
+
 <br />
 
-<h2>Daily Savings</h2>
+<h3>Daily Savings</h3>
 
 <p>  <input type="text" name="milessaved" id="milessaved" class="roiAnswer" />
 Daily Miles Saved</p>
@@ -39,7 +64,7 @@ Savings in Wages Daily</p>
 <p>  <input type="text" name="vehcosts" id="vehcosts" class="roiAnswer" />
 Savings in Vehicle Costs Daily</p>
 
-<h2>Long Term Savings</h2>
+<h3>Long Term Savings</h3>
 
 <p>  <input type="text" name="monthlysavings" id="monthlysavings" class="roiAnswer" />
 Total Monthly Savings</p>
@@ -51,17 +76,26 @@ Total Annual Savings</p>
 
 <script type="text/javascript">
 $(function() {
-    $("#roi-calc").click(function(e) {
+    var max = 0;
+    $("label").each(function(){
+        if ($(this).width() > max)
+            max = $(this).width();   
+    });
+    $("label").width(max);
+
+    $("#roi-form").validate();
+
+    $("#roi-form").submit(function(e) {
         e.preventDefault();
 
         var trucks = parseInt($("#trucks").val());
         var salary = parseFloat($("#salary").val());
         var cpm = parseFloat($("#cpm").val());
         var miles = parseInt($("#currmiles").val());
-        var reduction = parseInt($("#estmilessaved").val())/100;
+        var reduction = parseInt($("#list").val())/100;
 
         var milessavings = trucks * (miles * reduction);
-	var hourssavings = 1 / (60 / milessavings);
+	    var hourssavings = 1/(60 / milessavings);
         var dailysavings = salary * hourssavings;
         var vehiclesavings = cpm * milessavings;
         var ttlmonthlysavings = 20 * (dailysavings + vehiclesavings);
@@ -83,3 +117,4 @@ $(function() {
 
 </body>
 </html>
+

@@ -4,8 +4,26 @@
     <title>ROI Calculator</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+	
+<style>
 
-   	<link rel="stylesheet" href="calc.css" type="text/css" charset="utf-8">
+		// CSS goes here
+label, input[type="text"]{
+    float:left;
+    display:block;
+}
+label
+{
+    margin-right: 5px;
+}
+.field{
+    width:100%;
+    overflow:auto;
+    margin:5px 0px;
+}
+
+
+</style>
 
 </head>
 
@@ -16,24 +34,20 @@
 <p>Please fill in the fields with the "*" and then click the button for the calculation</p>
 
 <form id="roi-form">
-    <p>
-        * <input type="text" name="trucks" id="trucks" class="required" />
-        <label for="trucks">Number of Vehicles</label>
-    </p>
-    <p>
-        *  <input type="text" name="salary" id="salary" class="required" />
-        <label for="salary">Hourly Driver Salary</label>
-    </p>
-<p>*  <input type="text" name="cpm" id="cpm" class="required" />
-Cost per Mile</p>
-<p>*  <input type="text" name="currmiles" id="currmiles" class="required" />
-Total Miles Driven per Vehicle</p>
-<p>*  <select id="list">
+<p><label>* Number of Vehicles:    </label><input type="text" name="trucks" id="trucks" class="required" /></p>
+
+<p><label>* Hourly Driver Salary:</label><input type="text" name="salary" id="salary" class="required" /></p>
+
+<p><label>* Cost per Mile: </label><input type="text" name="cpm" id="cpm" class="required" /></p>
+
+<p><label>* Total Miles Driven per Vehicle: </label><input type="text" name="currmiles" id="currmiles" class="required" /></p>
+
+<p><label>* Estimated Mileage Reduction: </label><select id="list" class="required">
 <option value='0'>Select the Savings.....</option>
 <option value='10'>10 %</option>
 <option value='15'>15 %</option>
 <option value='20'>20 %</option>
-</select> Estimated Mileage Reduction</p>
+</select> </p>
 
 <input type="submit" id="roi-calc" value="Calculate Savings">
 
@@ -62,6 +76,13 @@ Total Annual Savings</p>
 
 <script type="text/javascript">
 $(function() {
+    var max = 0;
+    $("label").each(function(){
+        if ($(this).width() > max)
+            max = $(this).width();   
+    });
+    $("label").width(max);
+
     $("#roi-form").validate();
 
     $("#roi-form").submit(function(e) {
@@ -96,3 +117,4 @@ $(function() {
 
 </body>
 </html>
+
