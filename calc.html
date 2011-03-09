@@ -3,10 +3,16 @@
 <head>
     <title>ROI Calculator</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.validateMyForm.1.5.js"></script>
+    <script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/validate/jquery.validate.js"></script>
 
-    <link rel="stylesheet" href="calc.css" type="text/css" charset="utf-8">
+   	<link rel="stylesheet" href="calc.css" type="text/css" charset="utf-8">
 
+  <script>
+  $(document).ready(function(){
+    $("#roi-form").validate();
+  });
+  </script>	
+	
 </head>
 
 <body>
@@ -85,10 +91,6 @@ $(function() {
             $("#milessaved").val('There was an error');
         }
     });
-	    // Do validation on form
-
-    $("#roi-form").validateMyForm();
-
 });
 </script>
 
