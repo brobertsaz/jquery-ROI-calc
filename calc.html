@@ -3,7 +3,7 @@
 <head>
     <title>ROI Calculator</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/validate/jquery.validate.js"></script>
+    <script type="text/javascript" src="js/jquery.validateMyForm.1.5.js"></script>
 
     <link rel="stylesheet" href="calc.css" type="text/css" charset="utf-8">
 
@@ -15,7 +15,7 @@
 
 <p>Please fill in the fields with the "*" and then click the button for the calculation</p>
 
-<form>
+<form id="roi-form">
 <p>*  <input type="text" name="trucks" id="trucks" class="required" />
 Number of Vehicles</p>
 <p>*  <input type="text" name="salary" id="salary" class="required" />
@@ -24,7 +24,7 @@ Hourly Driver Salary</p>
 Cost per Mile</p>
 <p>*  <input type="text" name="currmiles" id="currmiles" class="required" />
 Total Miles Driven per Vehicle</p>
-<p>*  <select id='list' class="required">
+<p>*  <select id="list">
 <option value='0'>Select the Savings.....</option>
 <option value='10'>10 %</option>
 <option value='15'>15 %</option>
@@ -85,6 +85,10 @@ $(function() {
             $("#milessaved").val('There was an error');
         }
     });
+	    // Do validation on form
+
+    $("#roi-form").validateMyForm();
+
 });
 </script>
 
