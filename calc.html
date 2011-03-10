@@ -5,23 +5,10 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 	
-<style>
+<style type="text/css">
 
-		// CSS goes here
-label, input[type="text"]{
-    float:left;
-    display:block;
-}
-label
-{
-    margin-right: 5px;
-}
-.field{
-    width:100%;
-    overflow:auto;
-    margin:5px 0px;
-}
-
+label { width: 15em; float: left; }
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
 
 </style>
 
@@ -31,23 +18,39 @@ label
 
 <h2>ROI Calculator</h2>
 
-<p>Please fill in the fields with the "*" and then click the button for the calculation</p>
 
 <form id="roi-form">
-<p><label>* Number of Vehicles:    </label><input type="text" name="trucks" id="trucks" class="required" /></p>
+<fieldset>
+<legend>Please fill in the fields with the "*" and then click the button for the calculation</legend>
+<p>
+  <label for="trucks">Number of Vehicles:</label>
+  <em>*</em><input name="trucks" id="trucks" size="20" class="required" />
+</p>
 
-<p><label>* Hourly Driver Salary:</label><input type="text" name="salary" id="salary" class="required" /></p>
+<p>
+  <label for="salary">Hourly Driver Salary:</label>
+  <em>*</em><input name="salary" id="salary" size="20" class="required" />
+</p>
 
-<p><label>* Cost per Mile: </label><input type="text" name="cpm" id="cpm" class="required" /></p>
+<p>
+  <label for="cpm">Cost per Mile:</label>
+  <em>*</em><input name="cpm" id="cpm" size="20" class="required" />
+</p>
 
-<p><label>* Total Miles Driven per Vehicle: </label><input type="text" name="currmiles" id="currmiles" class="required" /></p>
+<p> 
+  <label for="currmiles">Total Miles Driven per Vehicle:</label> 
+  <em>*</em><input name="currmiles" id="currmiles" size="20" class="required" />
+</p>
 
-<p><label>* Estimated Mileage Reduction: </label><select id="list" class="required">
+<p>
+  <label for="list">Estimated Mileage Reduction:</label>
+  <em>*</em><select id="list" class="required">
 <option value='0'>Select the Savings.....</option>
 <option value='10'>10 %</option>
 <option value='15'>15 %</option>
 <option value='20'>20 %</option>
-</select> </p>
+</select> 
+</p>
 
 <input type="submit" id="roi-calc" value="Calculate Savings">
 
@@ -55,34 +58,40 @@ label
 
 <h3>Daily Savings</h3>
 
-<p>  <input type="text" name="milessaved" id="milessaved" class="roiAnswer" />
-Daily Miles Saved</p>
-<p>  <input type="text" name="hourssaved" id="hourssaved" class="roiAnswer" />
-Daily Hours Saved</p>
-<p>  <input type="text" name="dailywages" id="dailywages" class="roiAnswer" />
-Savings in Wages Daily</p>
-<p>  <input type="text" name="vehcosts" id="vehcosts" class="roiAnswer" />
-Savings in Vehicle Costs Daily</p>
+<p>
+  <label for="milessaved">Daily Miles Saved:</label>   
+  <input type="text" name="milessaved" id="milessaved" size="20" class="roiAnswer" />
+</p>
+<p>
+  <label for="hourssaved">Daily Hours Saved:</label>   
+  <input type="text" name="hourssaved" id="hourssaved" size="20" class="roiAnswer" />
+</p>
+<p>
+  <label for="dailywages">Daily Wages Saved:</label>   
+  <input type="text" name="dailywages" id="dailywages" size="20" class="roiAnswer" />
+</p>
+<p>
+  <label for="vehcosts">Daily Vehicle Costs Saved:</label>    
+  <input type="text" name="vehcosts" id="vehcosts" size="20" class="roiAnswer" />
+</p>
 
 <h3>Long Term Savings</h3>
 
-<p>  <input type="text" name="monthlysavings" id="monthlysavings" class="roiAnswer" />
-Total Monthly Savings</p>
-<p>  <input type="text" name="annualsavings" id="annualsavings" class="roiAnswer" />
-Total Annual Savings</p>
+<p> 
+  <label for="monthlysavings">Total Monthly Savings:</label>   
+  <input type="text" name="monthlysavings" id="monthlysavings" size="20" class="roiAnswer" />
+</p>
+<p>
+  <label for="annualsavings">Total Annual Savings:</label>   
+  <input type="text" name="annualsavings" id="annualsavings" size="20" class="roiAnswer" />
+</p>
 
+</fieldset>
 </form>
 
 
 <script type="text/javascript">
 $(function() {
-    var max = 0;
-    $("label").each(function(){
-        if ($(this).width() > max)
-            max = $(this).width();   
-    });
-    $("label").width(max);
-
     $("#roi-form").validate();
 
     $("#roi-form").submit(function(e) {
@@ -95,7 +104,7 @@ $(function() {
         var reduction = parseInt($("#list").val())/100;
 
         var milessavings = trucks * (miles * reduction);
-	    var hourssavings = 1/(60 / milessavings);
+	var hourssavings = 1/(60 / milessavings);
         var dailysavings = salary * hourssavings;
         var vehiclesavings = cpm * milessavings;
         var ttlmonthlysavings = 20 * (dailysavings + vehiclesavings);
