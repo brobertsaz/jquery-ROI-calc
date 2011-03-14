@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>ROI Calculator</title>
+    <title>Savings Calculator</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 	
@@ -16,7 +16,7 @@ label.error { float: none; color: red; padding-left: .5em; vertical-align: top; 
 
 <body>
 
-<h2>ROI Calculator</h2>
+<h2>Savings Calculator</h2>
 
 
 <form id="roi-form">
@@ -91,17 +91,19 @@ label.error { float: none; color: red; padding-left: .5em; vertical-align: top; 
 
 
 <script type="text/javascript">
-$(function() {
-    $("#roi-form").validate();
+    jQuery.noConflict();
+	
+jQuery(function() {
+    jQuery("#roi-form").validate();
 
-    $("#roi-form").submit(function(e) {
+    jQuery("#roi-form").submit(function(e) {
         e.preventDefault();
 
-        var trucks = parseInt($("#trucks").val());
-        var salary = parseFloat($("#salary").val());
-        var cpm = parseFloat($("#cpm").val());
-        var miles = parseInt($("#currmiles").val());
-        var reduction = parseInt($("#list").val())/100;
+        var trucks = parseInt(jQuery("#trucks").val());
+        var salary = parseFloat(jQuery("#salary").val());
+        var cpm = parseFloat(jQuery("#cpm").val());
+        var miles = parseInt(jQuery("#currmiles").val());
+        var reduction = parseInt(jQuery("#list").val())/100;
 
         var milessavings = trucks * (miles * reduction);
 	    var hourssavings = 1/(60 / milessavings);
@@ -111,14 +113,14 @@ $(function() {
         var ttlannualsavings = 12 * ttlmonthlysavings;
 
         if(!isNaN(milessavings)) {
-            $("#milessaved").val(milessavings.toFixed(2));
-            $("#hourssaved").val(hourssavings.toFixed(2));
-            $("#dailywages").val(dailysavings.toFixed(2));
-            $("#vehcosts").val(vehiclesavings.toFixed(2));
-            $("#monthlysavings").val(ttlmonthlysavings.toFixed(2));
-            $("#annualsavings").val(ttlannualsavings.toFixed(2));
+            jQuery("#milessaved").val(milessavings.toFixed(2));
+            jQuery("#hourssaved").val(hourssavings.toFixed(2));
+            jQuery("#dailywages").val(dailysavings.toFixed(2));
+            jQuery("#vehcosts").val(vehiclesavings.toFixed(2));
+            jQuery("#monthlysavings").val(ttlmonthlysavings.toFixed(2));
+            jQuery("#annualsavings").val(ttlannualsavings.toFixed(2));
         } else {
-            $("#milessaved").val('There was an error');
+            jQuery("#milessaved").val('There was an error');
         }
     });
 });
@@ -126,4 +128,3 @@ $(function() {
 
 </body>
 </html>
-
